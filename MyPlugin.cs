@@ -75,7 +75,7 @@ namespace Myplugin
                         EntityCollection result = service.RetrieveMultiple(new FetchExpression(fetchquery));
                         if(result.Entities.Count<=0)
                         {
-                            throw new InvalidPluginExecutionException("NO SUCH RECORD PREDENT IN FABDEV ");
+                            throw new InvalidPluginExecutionException("NO RECORD PREDENT IN FABDEV ");
                         }
                         else
                         {
