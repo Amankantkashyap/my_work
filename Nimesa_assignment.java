@@ -28,9 +28,6 @@ import 	java.util.Scanner;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-
-
-
 public class jsonreader 
 {
 	static Scanner sc;
@@ -51,16 +48,6 @@ public class jsonreader
 			{
 				line+=sc.nextLine();
 				//System.out.println(line);
-			}
-			long epoch=0;
-			try 
-			{
-
-				System.out.println(epoch);
-			} 
-			catch(Exception e) 
-			{
-			    System.out.println(e);
 			}
 			jsonreader json=new jsonreader();
 			
@@ -91,17 +78,18 @@ public class jsonreader
 				{
 					System.out.println("OOps ! Invalid Input...");
 				}
-				
-				
 			}
-
-			
-		
 		}
 		catch(Exception exc)
 		{
 			System.out.print(exc);
 		}
+		finally
+		{
+			sc.close();
+			sc1.close();
+		}
+		
 			
 		
 	}
@@ -110,7 +98,8 @@ public class jsonreader
 		try
 		{
 			System.out.println("Enter date");	
-			long mydate = (new java.text.SimpleDateFormat("dd/MM/yyyy").parse(sc1.nextLine()).getTime() / 1000)+19800;
+			//Below converting human readable date in UNIX epoch time.
+			long mydate = (new java.text.SimpleDateFormat("dd/MM/yyyy").parse(sc1.nextLine()).getTime() / 1000)+19800;//Adding 5:30 hr to match to UTC GMT time.
 			JSONObject object=new JSONObject(line);
 			JSONArray list=object.getJSONArray("list");
 			for(int i=0;i<list.length();i++)
@@ -121,16 +110,16 @@ public class jsonreader
 				long dt=inList.getLong("dt");
 				if(mydate<=dt )
 				{
-					if((mydate+86400)<=dt){
+					if((mydate+86400)<=dt) //adding 24HR
+					{
 						//System.out.println("break"+mydate+"-"+dt);
-						break;}
+						break;
+					}
 					//System.out.println("after if"+mydate+"-"+dt);
 					System.out.print("Temperature on "+inList.getString("dt_txt")+"--> ");
 					JSONObject main=inList.getJSONObject("main");
 					System.out.println(main.getDouble("temp")+" Kelvin");
-					
 				}
-				
 			}
 		}
 		catch(Exception exc)
@@ -143,8 +132,9 @@ public class jsonreader
 	{
 		try
 		{
-			System.out.println("Enter date");	
-			long mydate = (new java.text.SimpleDateFormat("dd/MM/yyyy").parse(sc1.nextLine()).getTime() / 1000)+19800;
+			System.out.println("Enter date");
+			//Below converting human readable date in UNIX epoch time.
+			long mydate = (new java.text.SimpleDateFormat("dd/MM/yyyy").parse(sc1.nextLine()).getTime() / 1000)+19800;//Adding 5:30 hr to match to UTC GMT time.
 			JSONObject object=new JSONObject(line);
 			JSONArray list=object.getJSONArray("list");
 			for(int i=0;i<list.length();i++)
@@ -155,31 +145,30 @@ public class jsonreader
 				long dt=inList.getLong("dt");
 				if(mydate<=dt )
 				{
-					if((mydate+86400)<=dt){
+					if((mydate+86400)<=dt)//adding 24HR
+					{
 						//System.out.println("break"+mydate+"-"+dt);
-						break;}
+						break;
+					}
 					//System.out.println("after if"+mydate+"-"+dt);
 					System.out.print("Presure on "+inList.getString("dt_txt")+"--> ");
 					JSONObject main=inList.getJSONObject("main");
 					System.out.println(main.getDouble("pressure")+" Pascal");
-					
 				}
-				
 			}
 		}
 		catch(Exception exc)
 		{
 			System.out.println(exc);
 		}
-		
-		
 	}
 	void getWindSpeed(String line)
 	{
 		try
 		{
 			System.out.println("Enter date");	
-			long mydate = (new java.text.SimpleDateFormat("dd/MM/yyyy").parse(sc1.nextLine()).getTime() / 1000)+19800;
+			//Below converting human readable date in UNIX epoch time.
+			long mydate = (new java.text.SimpleDateFormat("dd/MM/yyyy").parse(sc1.nextLine()).getTime() / 1000)+19800;//Adding 5:30 hr to match to UTC GMT time.
 			JSONObject object=new JSONObject(line);
 			JSONArray list=object.getJSONArray("list");
 			for(int i=0;i<list.length();i++)
@@ -190,16 +179,16 @@ public class jsonreader
 				long dt=inList.getLong("dt");
 				if(mydate<=dt )
 				{
-					if((mydate+86400)<=dt){
+					if((mydate+86400)<=dt)//adding 24HR
+					{
 						//System.out.println("break"+mydate+"-"+dt);
-						break;}
+						break;
+					}
 					//System.out.println("after if"+mydate+"-"+dt);
 					System.out.print("Wind Speed on "+inList.getString("dt_txt")+"--> ");
 					JSONObject main=inList.getJSONObject("wind");
 					System.out.println(main.getDouble("speed")+" Km/s");
-					
 				}
-				
 			}
 		}
 		catch(Exception exc)
@@ -207,6 +196,4 @@ public class jsonreader
 			System.out.println(exc);
 		}
 	}
-
 }
-
