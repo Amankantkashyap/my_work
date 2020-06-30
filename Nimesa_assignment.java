@@ -22,6 +22,8 @@ The program should be modular.*/
 
 package Nimesa_Assignments;
 
+package anshuKJun20;
+
 import  java.net.HttpURLConnection;
 import  java.net.URL;
 import 	java.util.Scanner;
@@ -38,14 +40,15 @@ public class jsonreader
 	{
 		try
 		{
-			URL Endpoint=new URL("https://samples.openweathermap.org/data/2.5/forecast/hourly?q=London,us&appid=b6907d289e10d714a6e88b30761fae22");
-			conn=(HttpURLConnection)Endpoint.openConnection();
+			URL endpoint=new URL("https://samples.openweathermap.org/data/2.5/forecast/hourly?q=London,us&appid=b6907d289e10d714a6e88b30761fae22");
+			conn=(HttpURLConnection)endpoint.openConnection();
 			conn.setRequestMethod("GET");
 			int responcecode=conn.getResponseCode();
-			System.out.println(responcecode);
+			
 			if(responcecode==200)
 			{
-				sc=new Scanner(Endpoint.openStream());
+				System.out.println("Connection Established successfully");
+				sc=new Scanner(endpoint.openStream());
 				while(sc.hasNext())
 				{
 					line+=sc.nextLine();
@@ -97,9 +100,7 @@ public class jsonreader
 			sc.close();
 			sc1.close();
 		}
-		
-			
-		
+
 	}
 	void getTemperature(String line)
 	{
