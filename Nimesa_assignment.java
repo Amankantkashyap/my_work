@@ -43,42 +43,50 @@ public class jsonreader
 			conn.setRequestMethod("GET");
 			int responcecode=conn.getResponseCode();
 			System.out.println(responcecode);
-			sc=new Scanner(Endpoint.openStream());
-			while(sc.hasNext())
+			if(responcecode==200)
 			{
-				line+=sc.nextLine();
-				//System.out.println(line);
+				sc=new Scanner(Endpoint.openStream());
+				while(sc.hasNext())
+				{
+					line+=sc.nextLine();
+					//System.out.println(line);
+				}
+				jsonreader json=new jsonreader();
+
+				while(true)
+				{
+					System.out.println("\nChoose option for getting weather forecast\n\n"
+							+ "   Enter 1 for Temperature\n\n   Enter 2 for Wind Speed\n\n   Enter 3 for Pressure \n\n   Enter 0 for Exit!...");
+					int input=sc1.nextInt();
+					sc1.nextLine();
+					if(input==1)
+					{
+						json.getTemperature(line);
+					}
+					else if(input==2)
+					{
+						json.getWindSpeed(line);
+					}
+					else if(input==3)
+					{
+						json.getPressure(line);
+					}
+					else if(input==0)
+					{
+						System.out.println("Thanks for using :)");
+						System.exit(0);
+					}
+					else
+					{
+						System.out.println("OOps ! Invalid Input...");
+					}
+				}
 			}
-			jsonreader json=new jsonreader();
+			else
+			{
+				System.out.println("Something Went Wrong! Connection Not Established");
+			}
 			
-			while(true)
-			{
-				System.out.println("\nChoose option for getting weather forecast\n\n"
-						+ "   Enter 1 for Temperature\n\n   Enter 2 for Wind Speed\n\n   Enter 3 for Pressure \n\n   Enter 0 for Exit!...");
-				int input=sc1.nextInt();
-				sc1.nextLine();
-				if(input==1)
-				{
-					json.getTemperature(line);
-				}
-				else if(input==2)
-				{
-					json.getWindSpeed(line);
-				}
-				else if(input==3)
-				{
-					json.getPressure(line);
-				}
-				else if(input==0)
-				{
-					System.out.println("Thanks for using :)");
-					System.exit(0);
-				}
-				else
-				{
-					System.out.println("OOps ! Invalid Input...");
-				}
-			}
 		}
 		catch(Exception exc)
 		{
