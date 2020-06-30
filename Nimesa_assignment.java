@@ -22,8 +22,6 @@ The program should be modular.*/
 
 package Nimesa_Assignments;
 
-package anshuKJun20;
-
 import  java.net.HttpURLConnection;
 import  java.net.URL;
 import 	java.util.Scanner;
